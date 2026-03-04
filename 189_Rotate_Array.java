@@ -1,23 +1,23 @@
 class Solution {
     public void rotate(int[] nums, int k) {
         int n = nums.length;
-        k = k % n; // Handle cases where k > n
+        k = k % n;
+        reverse(nums,0,n-1);
+        reverse(nums,0,k-1);
+        reverse(nums,k,n-1);
+    }
+    static void reverse(int[] arr, int start, int end) {
+        while(start < end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
 
-        int[] arr = new int[n];
-
-        // Copy last k elements to the beginning of arr
-        for (int i = 0; i < k; i++) {
-            arr[i] = nums[n - k + i];
-        }
-
-        // Copy first n-k elements to the rest of arr
-        for (int i = k; i < n; i++) {
-            arr[i] = nums[i - k];
-        }
-
-        // Copy arr back to nums
-        for (int i = 0; i < n; i++) {
-            nums[i] = arr[i];
+            start++;
+            end--;
         }
     }
 }
+
+
+// Time : O(n)
+// Space : O(1)
